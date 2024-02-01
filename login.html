@@ -1,23 +1,30 @@
-<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/core.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/md5.js"></script>
-<script>
-  const userAuths = [
-    {
-      user: 'foo',
-      hash: '71439b30e7436f8b019e9c50baae2936',
-      user: 'cantelope',
-      hash: '474148b5b5b1214eb20a86bbf361e897',
-    }
-  ]
-  
-  if(location.href.indexOf('user=') != -1 && location.href.indexOf('pass=') != -1){
-    user = location.href.split('user=')[1].split('&')[0].toLowerCase()
-    pass = location.href.split('pass=')[1].split('&')[0]
-    passhash = CryptoJS.MD5(user+pass).toString()
-    let res = {
-      user, pass, passhash,
-      success: !!userAuths.filter(auth => passhash === auth.hash).length
-    }
-    document.write(JSON.stringify(res))
-  }
-</script>
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/core.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/md5.js"></script>
+  </head>
+  <body>
+    <script>
+      const userAuths = [
+        {
+          user: 'foo',
+          hash: '71439b30e7436f8b019e9c50baae2936',
+          user: 'cantelope',
+          hash: '474148b5b5b1214eb20a86bbf361e897',
+        }
+      ]
+      
+      if(location.href.indexOf('user=') != -1 && location.href.indexOf('pass=') != -1){
+        user = location.href.split('user=')[1].split('&')[0].toLowerCase()
+        pass = location.href.split('pass=')[1].split('&')[0]
+        passhash = CryptoJS.MD5(user+pass).toString()
+        let res = {
+          user, pass, passhash,
+          success: !!userAuths.filter(auth => passhash === auth.hash).length
+        }
+        document.write('|-|-|-|'+JSON.stringify(res)+'|-|-|-|')
+      }
+    </script>
+  </body>
+</html>
