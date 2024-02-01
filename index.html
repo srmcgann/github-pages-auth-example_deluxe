@@ -126,8 +126,9 @@
           let pass = document.querySelector('#password').value
           url = `login.html?user=${user}&pass=${pass}`
           console.log(url)
-          fetch(url).then(res=>res.json()).then(data=>{
-            console.log("response: ", data)
+          fetch(url).then(res=>res.text()).then(data => {
+            let res = JSON.parse(data.split('|-|-|-|')[1].split('|-|-|-|')[0])
+            console.log("response: ", res)
           })
         }
       }
